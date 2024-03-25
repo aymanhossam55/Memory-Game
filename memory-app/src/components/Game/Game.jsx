@@ -69,11 +69,8 @@ const Game = () => {
           setFlippedIndices([]);
         }, 500);
       }
-    } else if (flippedIndices.length === 1 && attempts === 1) {
-      // Last two cards selected, consider all cards matched
-      setFinishGame(true);
-      setResult("You Win!");
-    }
+    } 
+    
   };
   
 
