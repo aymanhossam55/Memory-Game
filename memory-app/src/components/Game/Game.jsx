@@ -20,11 +20,14 @@ const Game = () => {
   const [attempts,setAttempts] = useState(0);
   const [result,setResult] = useState(null);
   const [finishgame,setFinishGame] = useState(false);
-
+  const [matchedIndices, setMatchedIndices] = useState([]);
+  const [matchingInProgress, setMatchingInProgress] = useState(false);
+  
   const client = createClient('UUboF4rkITmKuDkvHUUJGcKMX14tR1GqVfXCys9XqOblSHKAxER1C6Rf');
 
   const handleStartGame = () => {
     setStartGame(true);
+    shuffleArray(images);
   };
 
   function shuffleArray(array) {
@@ -34,9 +37,9 @@ const Game = () => {
     }
     return array;
   }
-
+  
   const handleCardClick = (index) => {
-    if (finishgame || flippedIndices.includes(index)) return; 
+    if (finishgame || flippedIndices.includes(index) || matchedIndices.includes(index) || matchingInProgress) return; 
   
     setFlippedCards((prevFlippedCards) => {
       const newFlippedCards = [...prevFlippedCards];
@@ -48,9 +51,12 @@ const Game = () => {
   
     if (flippedIndices.length === 1) {
       // Second card flipped, check for match
+      setMatchingInProgress(true); // Set matching in progress
       if (images[flippedIndices[0]].id === images[index].id) {
         // Match found
         setFlippedIndices([]);
+        setMatchedIndices((prevMatchedIndices) => [...prevMatchedIndices, flippedIndices[0], index]);
+        setMatchingInProgress(false); // Reset matching status after match
       } else {
         // No match, flip back after a short delay
         setTimeout(() => {
@@ -67,10 +73,10 @@ const Game = () => {
             return newFlippedCards;
           });
           setFlippedIndices([]);
+          setMatchingInProgress(false); // Reset matching status after flip back
         }, 500);
       }
     } 
-    
   };
   
 
@@ -108,6 +114,8 @@ const resetGame = () => {
   setAttempts(0);
   setResult(null);
   setFinishGame(false);
+  setMatchedIndices([]);
+  setMatchingInProgress(false); 
 };
 
   return (
@@ -120,7 +128,7 @@ const resetGame = () => {
             <CardAmount Amount={Amount} setAmount={setAmount} setImages={setImages} />
             <Pace pace={pace} setPace={setPace} Paces={Paces} setAttempts={setAttempts} />
             <div className='btn-start flex justify-center mt-4' onClick={handleStartGame}>
-              <button className='text-center rounded-xl p-2 px-8 bg-gray-100 hover:bg-gray-200' onClick={() => shuffleArray(images)}>
+              <button className='text-center rounded-xl p-2 px-8 bg-gray-100 hover:bg-gray-200' onClick={handleStartGame}>
                 Start
               </button>
             </div>
