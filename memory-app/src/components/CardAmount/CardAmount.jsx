@@ -37,7 +37,7 @@ const CardAmount = ({ Amount, setAmount, setImages }) => {
 }
 
 CardAmount.propTypes = {
-  Amount: PropTypes.string.isRequired,
+  Amount: PropTypes.number.isRequired,
   setAmount: PropTypes.func.isRequired,
   setImages: PropTypes.func.isRequired
 };
