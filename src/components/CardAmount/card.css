@@ -1,0 +1,16 @@
+.amount-button {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.amount-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.amount-button:not(:disabled):hover svg {
+    background-color: #d1d5db;
+}

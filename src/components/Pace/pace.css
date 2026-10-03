@@ -1,0 +1,8 @@
+.pace-option {
+    margin-bottom: 4px;
+}
+
+.pace-option label {
+    cursor: pointer;
+    text-transform: capitalize;
+}

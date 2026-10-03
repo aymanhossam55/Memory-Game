@@ -1,0 +1,8 @@
+.category-option {
+    margin-bottom: 4px;
+}
+
+.category-option label {
+    cursor: pointer;
+    text-transform: capitalize;
+}
