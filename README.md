@@ -69,7 +69,7 @@ a computer/laptop to copy the files to with a code editor of your choice
 
 ## Live server
 
-Link: https://memory-game-11d4ac.netlify.app/
+Link: https://memory-game-delta-coral.vercel.app/
 
 
 ## Preview
